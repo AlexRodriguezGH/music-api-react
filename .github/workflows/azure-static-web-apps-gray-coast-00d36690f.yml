@@ -15,14 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - name: Change Permissions for .git/config
-        run: sudo chmod 644 .git/config
-        
-      - name: Remove Git extraheader with sudo
-        run: sudo git config --global --unset http.https://github.com/.extraheader || true
+      - name: Remove default Git credentials
+        run: git config --global --unset-all http.https://github.com/.extraheader || true
         
       - uses: actions/checkout@v4
         with:
+          persist-credentials: false
           submodules: true
           lfs: false
           fetch-depth: 0
