@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
+      - name: Cleanup git config
+        run: git config --global --unset-all http.https://github.com/.extraheader || true
       - uses: actions/checkout@v4
         with:
           submodules: true
